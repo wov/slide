@@ -1,0 +1,111 @@
+<article>
+	<h>nodejs简介</h>
+	<p>
+Node.js is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications. 
+Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.
+	</p>
+	<p>主页地址：<a href="http://nodejs.org" target="_blank">nodejs.org</a></p>
+
+	<ul>
+		<li>运行在服务器端</li>
+		<li>使用javascript语言。用 google chrome 脚本引擎解析</li>
+		<li>无阻塞,能够处理高并发。 不过比较容易崩溃</li>
+		<li>无兼容性问题</li>
+	</ul>
+</article><article>
+	<h>nodejs安装&运行</h>
+	<p>下载地址：<a href="http://nodejs.org/" target="_blank">http://nodejs.org/</a></p>
+	<p>示例：<a href="example/main.js" target="_blank">main.js</a></p>
+	<pre>
+var http = require('http');
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('Hello World\n');
+}).listen(1337);
+console.log('Server running at http://127.0.0.1:1337/');
+	</pre>
+	<p>运行</p>
+	<pre>node main.js</pre>
+</article><article>
+	<h>使用npm安装nodejs模块</h>
+	<p><a href="https://npmjs.org/" target="_blank">https://npmjs.org/</a></p>
+<pre>
+npm install express
+npm install jade
+</pre>
+	<p>查看安装了哪些扩展</p>
+<pre>
+npm ls
+</pre>
+</article><article>
+	<h>express简介</h>
+	<p>express是node服务器的一个框架<a href="http://expressjs.com/" target="_blank">http://expressjs.com/</a></p>
+	<p>主要有以下功能:</p>
+	<ul>
+		<li>配置服务器</li>
+		<li>路由</li>
+	</ul>
+	<p>示例如下：</p>
+<pre>
+var express = require('express');
+var app = express();
+
+app.use(express.static( __dirname + '../../../www'));
+app.use(app.router);
+
+app.get('/',function(req,res){
+	console.log('get index page!');
+	res.send('hello express!');	
+});
+
+app.get('*', function(req, res) {  
+	console.log('Not Found!');
+	res.send('404','not found!');
+});  
+app.listen(1337);
+</pre>
+</article><article>
+	<h>jade简介</h>
+	<p>jade是node的模板引擎，可以同时运行在服务器端和客户端<a href="http://jade-lang.com/" target="_blank">http://jade-lang.com/</a></p>
+	<ul>
+		<li>使用空格/tab缩进 但是不能混用空格和tab</li>
+		<li>可以使用脚本</li>
+	</ul>
+<pre>
+!!!5
+html
+ include layout/head
+ include component/body
+  include layout/header
+  .main.exploreContent
+    nav
+      ul.listContent
+        //li.exploreType.mine mine
+        //li.exploreType.star star
+        li.exploreType.popular popular
+        //li.exploreType.last last
+    .cubesContent.clearfix
+  include layout/footer
+
+  - var bubbleTitle = "detail";
+  - var bubbleId = "detailBubble";
+  include component/exploreBubble
+
+  - var bubbleTitle = "share";
+  - var bubbleId = "shareBubble";
+  include component/shareBubble
+
+  script(type='text/javascript',src="/script/index.js")
+</pre>
+</article>
+
+
+
+
+
+
+
+
+
+
+
