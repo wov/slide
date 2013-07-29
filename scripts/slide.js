@@ -7,6 +7,18 @@ $(function(){
 	$('.full').on('click',function() {
 		document.getElementById('content').webkitRequestFullScreen();
 	});
+
+	document.addEventListener('keydown',function(e){
+		switch(e.keyCode){
+			case 37 :
+			turnPage(-1);
+			break;
+			case 39 : 
+			turnPage(1);
+			break;
+		}
+	});
+
 	var hash = window.location.hash.replace('#','');
 	if(!hash){return false;}
 	
@@ -15,6 +27,9 @@ $(function(){
 		$('#content').bind('contextmenu', function(){ return false });
 
 	    $('#content').mousedown(function(event){
+	    	if(event.target.nodeName == 'A'){
+	    		return false;
+	    	}
 	        switch (event.which){
 	            case 1:
 	            turnPage(1);
